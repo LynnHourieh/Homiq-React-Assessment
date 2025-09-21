@@ -13,12 +13,14 @@ export type SignUpFormInputs = {
 };
 
 export interface InputFieldProps<T extends Record<string, any>> {
-  label: string;
+  label?: string;
   type?: string;
   placeholder?: string;
   error?: FieldError;
   name: Path<T>;
-  register: UseFormRegister<T>;
+  register?: UseFormRegister<T>;
+  value?: string;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 export type Product = {
