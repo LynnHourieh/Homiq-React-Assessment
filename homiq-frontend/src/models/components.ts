@@ -45,3 +45,11 @@ export interface AuthContextType {
   login: (user: User) => void;
   logout: () => void;
 }
+
+export interface SelectFieldProps {
+  label?: string;
+  options: { value: string; label: string }[];
+  value?: string;
+  onChange?: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+  error?: { message?: string };
+}

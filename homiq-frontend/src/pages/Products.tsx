@@ -2,10 +2,12 @@ import React, { useEffect, useState } from "react";
 import type { Product } from "../models/components";
 import ProductCard from "./ProductCard";
 import InputField from "../components/InputField";
+import SelectField from "../components/SelectField";
 
 const Products: React.FC = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [search, setSearch] = useState("");
+  const [category, setCategory] = useState("All");
   const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
   const PRODUCTS_API_URL = import.meta.env.VITE_PRODUCTS_API;
 
@@ -25,16 +27,22 @@ const Products: React.FC = () => {
   }, []);
 
   useEffect(() => {
+    let result = [...products];
+
     if (search) {
-      setFilteredProducts(
-        products.filter((p) =>
-          p.name.toLowerCase().includes(search.toLowerCase())
-        )
+      result = result.filter((p) =>
+        p.name.toLowerCase().includes(search.toLowerCase())
       );
-    } else {
-      setFilteredProducts(products);
     }
-  }, [search, products]);
+
+    if (category !== "All") {
+      result = result.filter((p) => p.category === category);
+    }
+
+    setFilteredProducts(result);
+  }, [search, category, products]);
+
+  const categories = ["All", ...new Set(products.map((p) => p.category))];
 
   return (
     <div className="min-h-screen bg-gray-50 p-6">
@@ -49,6 +57,14 @@ const Products: React.FC = () => {
             placeholder="Search products..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
+          />
+          <SelectField
+            value={category}
+            onChange={(e) => setCategory(e.target.value)}
+            options={categories.map((category) => ({
+              value: category,
+              label: category,
+            }))}
           />
         </div>
 
