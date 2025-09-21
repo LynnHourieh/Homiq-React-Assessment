@@ -134,7 +134,7 @@ To get your own API key:
 5. Create a `.env` file in the root of your project and add:
 
    ```env
-   VITE_UNSPLASH_ACCESS_KEY=your_access_key_here
+   VITE_UNSPLASH_KEY=your_access_key_here
 
 
 ------------------------------------------------------------------------
