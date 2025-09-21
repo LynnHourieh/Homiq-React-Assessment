@@ -14,20 +14,23 @@ const Products: React.FC = () => {
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState(5);
   const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
-  const PRODUCTS_API_URL = import.meta.env.VITE_PRODUCTS_API;
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const PRODUCTS_API_URL = import.meta.env.VITE_PRODUCTS_API;
 
   const { logout } = useAuth();
 
   const fetchProducts = async () => {
     setLoading(true);
+    setError(null);
     try {
       const response = await fetch(PRODUCTS_API_URL + "/products");
       const data = await response.json();
       setProducts(data);
       setFilteredProducts(data);
     } catch (err) {
+      setError("Failed to load products. Please try again later.");
       console.error("Error loading products:" + err);
     } finally {
       setLoading(false);
@@ -91,7 +94,11 @@ const Products: React.FC = () => {
             }))}
           />
         </div>
-
+        {error && (
+          <div className="text-red-600 bg-red-100 border border-red-300 rounded-lg p-3 text-center">
+            {error}
+          </div>
+        )}
         {loading ? (
           <div className="flex justify-center items-center py-12">
             <div className="w-8 h-8 border-4 border-blue-400 border-t-transparent rounded-full animate-spin"></div>
