@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import type { Product } from "../models/components";
-import ProductCard from "./ProductCard";
+import ProductCard from "../components/ProductCard";
 import InputField from "../components/InputField";
 import SelectField from "../components/SelectField";
 

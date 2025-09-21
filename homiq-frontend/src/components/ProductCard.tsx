@@ -1,4 +1,4 @@
-import Rating from "../components/Rating";
+import Rating from "./Rating";
 import { useUnsplashImage } from "../hooks/useUnsplashImage";
 import type { Product } from "../models/components";
 
