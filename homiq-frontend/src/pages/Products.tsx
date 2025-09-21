@@ -3,6 +3,7 @@ import type { Product } from "../models/components";
 import ProductCard from "../components/ProductCard";
 import InputField from "../components/InputField";
 import SelectField from "../components/SelectField";
+import Modal from "../components/Modal";
 
 const Products: React.FC = () => {
   const [products, setProducts] = useState<Product[]>([]);
@@ -12,6 +13,7 @@ const Products: React.FC = () => {
   const [pageSize, setPageSize] = useState(5);
   const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
   const PRODUCTS_API_URL = import.meta.env.VITE_PRODUCTS_API;
+  const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
 
   const fetchProducts = async () => {
     try {
@@ -57,6 +59,7 @@ const Products: React.FC = () => {
       <h1 className="text-[32px] font-bold text-center text-gray-800 pb-6">
         Our Products
       </h1>
+      
       <div className="max-w-7xl mx-auto space-y-6">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
           <InputField
@@ -78,7 +81,7 @@ const Products: React.FC = () => {
 
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {paginated.map((product) => (
-            <ProductCard key={product.id} product={product} />
+            <ProductCard key={product.id} product={product} onSelect={(p) => setSelectedProduct(p)} />
           ))}
         </div>
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
@@ -115,6 +118,12 @@ const Products: React.FC = () => {
           </div>
         </div>
       </div>
+       <Modal
+        isOpen={!!selectedProduct}
+        onClose={() => setSelectedProduct(null)}
+      >
+        {selectedProduct && <ProductCard product={selectedProduct} variant="modal" onClose={() => setSelectedProduct(null)} />}
+      </Modal>
     </div>
   );
 };

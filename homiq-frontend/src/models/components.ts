@@ -34,8 +34,8 @@ export type Product = {
 };
 
 export interface RatingProps {
-  value: number; 
-  max?: number;  
+  value: number;
+  max?: number;
 }
 
 export type User = { id: string; email: string } | null;
@@ -49,7 +49,20 @@ export interface AuthContextType {
 export interface SelectFieldProps {
   label?: string;
   options: { value: string | number; label: string }[];
-  value?: string | number; 
+  value?: string | number;
   onChange?: (e: React.ChangeEvent<HTMLSelectElement>) => void;
   error?: { message?: string };
+}
+
+export interface ModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  children: React.ReactNode;
+}
+
+export interface ProductCardProps {
+  product: Product;
+  variant?: "card" | "modal";
+  onSelect?: (product: Product) => void;
+  onClose?: () => void;
 }
