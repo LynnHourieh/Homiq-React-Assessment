@@ -1,6 +1,7 @@
 import Rating from "./Rating";
 import { useUnsplashImage } from "../hooks/useUnsplashImage";
 import type { ProductCardProps } from "../models/components";
+import { useState } from "react";
 
 const ProductCard: React.FC<ProductCardProps> = ({
   product,
@@ -9,6 +10,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
   onClose,
 }) => {
   const imageUrl = useUnsplashImage(product.name);
+  const [imgLoaded, setImgLoaded] = useState(false);
 
   // === Card view (used in grid/list) ===
   if (variant === "card") {
@@ -20,13 +22,21 @@ const ProductCard: React.FC<ProductCardProps> = ({
         <img
           src={imageUrl || product.image}
           alt={product.name}
-          className="rounded-lg h-40 w-full object-cover mb-3 
-             transform transition-transform duration-300 
-             hover:scale-105"
+          onLoad={() => setImgLoaded(true)}
+          className={`
+  rounded-lg h-40 w-full object-cover mb-3
+  transform transition-transform duration-300 hover:scale-105
+  ${imgLoaded ? "opacity-100" : "opacity-0"} transition-opacity duration-300
+`}
         />
-        <h3 className="text-lg font-semibold text-gray-800 text-center">{product.name}</h3>
+
+        <h3 className="text-lg font-semibold text-gray-800 text-center">
+          {product.name}
+        </h3>
         <p className="text-sm text-gray-500 text-center">{product.category}</p>
-        <p className="text-blue-600 font-bold mt-1 text-center">${product.price}</p>
+        <p className="text-blue-600 font-bold mt-1 text-center">
+          ${product.price}
+        </p>
         <div className="flex items-center justify-center mt-1">
           <Rating value={product.rating} />
         </div>
@@ -51,7 +61,9 @@ const ProductCard: React.FC<ProductCardProps> = ({
       </div>
 
       <div className="flex flex-col gap-3">
-        <h2 className="text-2xl font-bold text-gray-800 text-center">{product.name}</h2>
+        <h2 className="text-2xl font-bold text-gray-800 text-center">
+          {product.name}
+        </h2>
         <p className="text-sm text-gray-500 text-center">{product.category}</p>
         <p className="text-xl font-semibold text-blue-600 text-center">
           ${product.price.toFixed(2)}
