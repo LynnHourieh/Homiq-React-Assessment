@@ -5,8 +5,10 @@ import type { SignUpFormInputs } from "../models/components";
 import { useForm } from "react-hook-form";
 import { signupSchema } from "../validations/signupSchema";
 import bcrypt from "bcryptjs";
+import { useNavigate } from "react-router-dom";
 
 const Signup = () => {
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -32,7 +34,7 @@ const Signup = () => {
         throw new Error("Failed to register user");
       }
 
-      window.location.href = "/login";
+      navigate("/login");
     } catch (err) {
       console.error("Error creating user:", err);
     }

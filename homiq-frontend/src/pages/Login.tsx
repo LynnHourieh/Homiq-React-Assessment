@@ -6,9 +6,13 @@ import { useForm } from "react-hook-form";
 import { loginSchema } from "../validations/loginSchema";
 import bcrypt from "bcryptjs";
 import { useState } from "react";
+import { useAuth } from "../context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [loginError, setLoginError] = useState<string | null>(null);
+  const { login } = useAuth();
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -35,8 +39,8 @@ const Login = () => {
       const isMatch = await bcrypt.compare(data.password, user.password);
 
       if (isMatch) {
-        localStorage.setItem("user", JSON.stringify(user));
-        window.location.href = "/products";
+        login({ id: user.id, email: user.email });
+        navigate("/products");
       } else {
         setLoginError("Incorrect password");
       }
@@ -69,7 +73,6 @@ const Login = () => {
               register={register}
               error={errors.email}
             />
-            
           </div>
 
           <div>
@@ -81,7 +84,6 @@ const Login = () => {
               register={register}
               error={errors.password}
             />
-            
           </div>
 
           <button
