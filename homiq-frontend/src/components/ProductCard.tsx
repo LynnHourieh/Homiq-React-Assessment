@@ -20,15 +20,17 @@ const ProductCard: React.FC<ProductCardProps> = ({
         <img
           src={imageUrl || product.image}
           alt={product.name}
-          className="rounded-lg h-40 w-full object-cover mb-3"
+          className="rounded-lg h-40 w-full object-cover mb-3 
+             transform transition-transform duration-300 
+             hover:scale-105"
         />
-        <h3 className="text-lg font-semibold text-gray-800">{product.name}</h3>
-        <p className="text-sm text-gray-500">{product.category}</p>
-        <p className="text-blue-600 font-bold mt-1">${product.price}</p>
+        <h3 className="text-lg font-semibold text-gray-800 text-center">{product.name}</h3>
+        <p className="text-sm text-gray-500 text-center">{product.category}</p>
+        <p className="text-blue-600 font-bold mt-1 text-center">${product.price}</p>
         <div className="flex items-center justify-center mt-1">
           <Rating value={product.rating} />
         </div>
-        <p className="text-sm text-gray-600 mt-2 line-clamp-3">
+        <p className="text-sm text-gray-600 mt-2 line-clamp-3 text-center">
           {product.description}
         </p>
       </div>
@@ -42,21 +44,23 @@ const ProductCard: React.FC<ProductCardProps> = ({
         <img
           src={imageUrl || product.image}
           alt={product.name}
-          className="max-h-64 object-contain"
+          className="max-h-64 object-contain 
+             transform transition-transform duration-300 
+             hover:scale-105"
         />
       </div>
 
       <div className="flex flex-col gap-3">
-        <h2 className="text-2xl font-bold text-gray-800">{product.name}</h2>
-        <p className="text-sm text-gray-500">{product.category}</p>
-        <p className="text-xl font-semibold text-blue-600">
+        <h2 className="text-2xl font-bold text-gray-800 text-center">{product.name}</h2>
+        <p className="text-sm text-gray-500 text-center">{product.category}</p>
+        <p className="text-xl font-semibold text-blue-600 text-center">
           ${product.price.toFixed(2)}
         </p>
         <div className="flex items-center justify-center mt-1">
           <Rating value={product.rating} />
         </div>
 
-        <p className="text-gray-600">{product.description}</p>
+        <p className="text-gray-600 text-center">{product.description}</p>
 
         <button
           className="mt-4 bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 cursor-pointer"
