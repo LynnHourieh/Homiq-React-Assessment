@@ -8,6 +8,8 @@ const Products: React.FC = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState("All");
+  const [page, setPage] = useState(1);
+  const [pageSize, setPageSize] = useState(5);
   const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
   const PRODUCTS_API_URL = import.meta.env.VITE_PRODUCTS_API;
 
@@ -40,9 +42,15 @@ const Products: React.FC = () => {
     }
 
     setFilteredProducts(result);
+    setPage(1);
   }, [search, category, products]);
 
   const categories = ["All", ...new Set(products.map((p) => p.category))];
+
+  // Pagination
+  const start = (page - 1) * pageSize;
+  const paginated = filteredProducts.slice(start, start + pageSize);
+  const totalPages = Math.ceil(filteredProducts.length / pageSize);
 
   return (
     <div className="min-h-screen bg-gray-50 p-6">
@@ -69,9 +77,42 @@ const Products: React.FC = () => {
         </div>
 
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-          {filteredProducts.map((product) => (
+          {paginated.map((product) => (
             <ProductCard key={product.id} product={product} />
           ))}
+        </div>
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div>
+            <span className="text-sm text-gray-600">
+              Page {page} of {totalPages || 1}
+            </span>
+          </div>
+
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => setPage((p) => Math.max(p - 1, 1))}
+              disabled={page === 1}
+              className="px-3 py-1 border rounded-lg disabled:opacity-50"
+            >
+              Prev
+            </button>
+            <button
+              onClick={() => setPage((p) => Math.min(p + 1, totalPages))}
+              disabled={page === totalPages}
+              className="px-3 py-1 border rounded-lg disabled:opacity-50"
+            >
+              Next
+            </button>
+
+            <SelectField
+              value={pageSize}
+              onChange={(e) => setPageSize(Number(e.target.value))}
+              options={[
+                { value: 5, label: "5 / page" },
+                { value: 10, label: "10 / page" },
+              ]}
+            />
+          </div>
         </div>
       </div>
     </div>

@@ -48,8 +48,8 @@ export interface AuthContextType {
 
 export interface SelectFieldProps {
   label?: string;
-  options: { value: string; label: string }[];
-  value?: string;
+  options: { value: string | number; label: string }[];
+  value?: string | number; 
   onChange?: (e: React.ChangeEvent<HTMLSelectElement>) => void;
   error?: { message?: string };
 }
