@@ -136,6 +136,8 @@ To get your own API key:
    ```env
    VITE_UNSPLASH_KEY=your_access_key_here
 
+   For Testing you can use VITE_UNSPLASH_KEY = btYtf36kzSDQ3SyTw4cTr9lF6Ltp-rf3of7Fd42Pp9U
+
 
 ------------------------------------------------------------------------
 
