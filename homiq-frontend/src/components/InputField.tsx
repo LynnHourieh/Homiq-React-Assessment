@@ -1,14 +1,17 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React from "react";
 import type { InputFieldProps } from "../models/components";
 
 
-const InputField: React.FC<InputFieldProps> = ({
+const InputField: React.FC<InputFieldProps<any>> = ({
   label,
   type = "text",
   placeholder,
   error,
   register,
   name,
+  value,
+  onChange,
 }) => {
   return (
     <div>
@@ -18,7 +21,9 @@ const InputField: React.FC<InputFieldProps> = ({
       <input
         type={type}
         placeholder={placeholder}
-        {...register(name)}
+        {...(register ? register(name) : {})}
+        value={value}
+        onChange={onChange}
         className={`mt-1 block w-full border rounded-md p-2 focus:ring-2 focus:outline-none ${
           error
             ? "border-red-500 focus:ring-red-500"

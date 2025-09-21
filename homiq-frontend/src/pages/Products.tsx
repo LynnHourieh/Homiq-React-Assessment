@@ -1,10 +1,16 @@
 import React, { useEffect, useState } from "react";
 import type { Product } from "../models/components";
 import ProductCard from "./ProductCard";
+import InputField from "../components/InputField";
+import SelectField from "../components/SelectField";
 
 const Products: React.FC = () => {
   const [products, setProducts] = useState<Product[]>([]);
-
+  const [search, setSearch] = useState("");
+  const [category, setCategory] = useState("All");
+  const [page, setPage] = useState(1);
+  const [pageSize, setPageSize] = useState(5);
+  const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
   const PRODUCTS_API_URL = import.meta.env.VITE_PRODUCTS_API;
 
   const fetchProducts = async () => {
@@ -12,6 +18,7 @@ const Products: React.FC = () => {
       const response = await fetch(PRODUCTS_API_URL + "/products");
       const data = await response.json();
       setProducts(data);
+      setFilteredProducts(data);
     } catch (err) {
       console.error("Error loading products:" + err);
     }
@@ -21,16 +28,91 @@ const Products: React.FC = () => {
     fetchProducts();
   }, []);
 
+  useEffect(() => {
+    let result = [...products];
+
+    if (search) {
+      result = result.filter((p) =>
+        p.name.toLowerCase().includes(search.toLowerCase())
+      );
+    }
+
+    if (category !== "All") {
+      result = result.filter((p) => p.category === category);
+    }
+
+    setFilteredProducts(result);
+    setPage(1);
+  }, [search, category, products]);
+
+  const categories = ["All", ...new Set(products.map((p) => p.category))];
+
+  // Pagination
+  const start = (page - 1) * pageSize;
+  const paginated = filteredProducts.slice(start, start + pageSize);
+  const totalPages = Math.ceil(filteredProducts.length / pageSize);
+
   return (
     <div className="min-h-screen bg-gray-50 p-6">
       <h1 className="text-[32px] font-bold text-center text-gray-800 pb-6">
         Our Products
       </h1>
       <div className="max-w-7xl mx-auto space-y-6">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+          <InputField
+            name="search"
+            type="text"
+            placeholder="Search products..."
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+          />
+          <SelectField
+            value={category}
+            onChange={(e) => setCategory(e.target.value)}
+            options={categories.map((category) => ({
+              value: category,
+              label: category,
+            }))}
+          />
+        </div>
+
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-          {products.map((product) => (
+          {paginated.map((product) => (
             <ProductCard key={product.id} product={product} />
           ))}
+        </div>
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div>
+            <span className="text-sm text-gray-600">
+              Page {page} of {totalPages || 1}
+            </span>
+          </div>
+
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => setPage((p) => Math.max(p - 1, 1))}
+              disabled={page === 1}
+              className="px-3 py-1 border rounded-lg disabled:opacity-50"
+            >
+              Prev
+            </button>
+            <button
+              onClick={() => setPage((p) => Math.min(p + 1, totalPages))}
+              disabled={page === totalPages}
+              className="px-3 py-1 border rounded-lg disabled:opacity-50"
+            >
+              Next
+            </button>
+
+            <SelectField
+              value={pageSize}
+              onChange={(e) => setPageSize(Number(e.target.value))}
+              options={[
+                { value: 5, label: "5 / page" },
+                { value: 10, label: "10 / page" },
+              ]}
+            />
+          </div>
         </div>
       </div>
     </div>
