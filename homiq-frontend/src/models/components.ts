@@ -20,3 +20,18 @@ export interface InputFieldProps<T extends Record<string, any>> {
   name: Path<T>;
   register: UseFormRegister<T>;
 }
+
+export type Product = {
+  id: number;
+  name: string;
+  category: string;
+  price: number;
+  rating: number;
+  description: string;
+  image?: string;
+};
+
+export interface RatingProps {
+  value: number; 
+  max?: number;  
+}
