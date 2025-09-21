@@ -1,12 +1,13 @@
 import Rating from "../components/Rating";
+import { useUnsplashImage } from "../hooks/useUnsplashImage";
 import type { Product } from "../models/components";
 
 const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
-
+const imageUrl = useUnsplashImage(product.name);
   return (
     <div className="bg-white rounded-xl shadow-md p-4 flex flex-col">
       <img
-        src={product.image}
+        src={imageUrl || product.image}
         alt={product.name}
         className="rounded-lg h-40 w-full object-cover mb-3"
       />
