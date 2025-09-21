@@ -27,7 +27,7 @@ npm install
 
 ### 3. Environment variables
 
-Create a `.env` file in the project root:
+Create a `.env` file in the homiq-frontend directory :
 
 ``` bash
 VITE_PRODUCTS_API=http://localhost:4000
@@ -42,17 +42,22 @@ VITE_UNSPLASH_ACCESS_KEY=your_unsplash_api_key
 
 Sign up -> your apps -> New Application
 ### 4. Run mock APIs with json-server
+First install json-server 
+```bash
+npm install -g json-server
+
+```
 
 In one terminal, start the products API (port `4000`):
 
 ``` bash
-npx json-server --watch products.json --port 4000
+json-server --watch products.json --port 4000
 ```
 
 In another terminal, start the users API (port `4001`):
 
 ``` bash
-npx json-server --watch users.json --port 4001
+json-server --watch users.json --port 4001
 ```
 
 ### 5. Start the React app
