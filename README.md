@@ -37,7 +37,7 @@ VITE_UNSPLASH_ACCESS_KEY=your_unsplash_api_key
 
 -   `VITE_PRODUCTS_API` → json-server endpoint for products\
 -   `VITE_USERS_API` → json-server endpoint for users (signup/login)\
--   `VITE_UNSPLASH_ACCESS_KEY` → [Unsplash API Access
+-   `VITE_UNSPLASH_KEY` → [Unsplash API Access
     Key](https://unsplash.com/developers)
 
 Sign up -> your apps -> New Application
