@@ -35,3 +35,11 @@ export interface RatingProps {
   value: number; 
   max?: number;  
 }
+
+export type User = { id: string; email: string } | null;
+
+export interface AuthContextType {
+  user: User;
+  login: (user: User) => void;
+  logout: () => void;
+}
