@@ -7,6 +7,8 @@ export type LoginFormInputs = {
 };
 
 export type SignUpFormInputs = {
+  firstName: string;
+  lastName:string;
   email: string;
   password: string;
   confirmPassword: string;
@@ -21,6 +23,8 @@ export interface InputFieldProps<T extends Record<string, any>> {
   register?: UseFormRegister<T>;
   value?: string;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  className?:string;
+  labelClassName?:string;
 }
 
 export type Product = {
@@ -65,4 +69,9 @@ export interface ProductCardProps {
   variant?: "card" | "modal";
   onSelect?: (product: Product) => void;
   onClose?: () => void;
+}
+
+
+export interface HeroSlideshowProps {
+  slides: string[];
 }

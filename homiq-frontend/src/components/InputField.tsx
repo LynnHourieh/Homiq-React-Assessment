@@ -12,10 +12,12 @@ const InputField: React.FC<InputFieldProps<any>> = ({
   name,
   value,
   onChange,
+  className,
+  labelClassName
 }) => {
   return (
     <div>
-      <label className="block text-sm font-medium text-gray-700 text-left">
+      <label className={`block text-sm font-medium text-gray-700 text-left ${labelClassName}`}>
         {label}
       </label>
       <input
@@ -28,7 +30,7 @@ const InputField: React.FC<InputFieldProps<any>> = ({
           error
             ? "border-red-500 focus:ring-red-500"
             : "border-gray-300 focus:ring-blue-500"
-        }`}
+        } ${className}`}
       />
       {error && <p className="text-red-500 text-xs mt-1">{error.message}</p>}
     </div>
