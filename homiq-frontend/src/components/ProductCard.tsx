@@ -19,18 +19,25 @@ const ProductCard: React.FC<ProductCardProps> = ({
         className="bg-white rounded-xl shadow-md p-4 flex flex-col cursor-pointer hover:shadow-lg transition"
         onClick={() => onSelect?.(product)}
       >
+        {!imgLoaded && (
+          <div className="absolute inset-0 rounded-lg bg-gray-200 animate-pulse" />
+        )}
         <img
           src={imageUrl || product.image}
           alt={product.name}
           onLoad={() => setImgLoaded(true)}
           className={`
-  rounded-lg h-40 w-full object-cover mb-3
-  transform transition-transform duration-300 hover:scale-105
-  ${imgLoaded ? "opacity-100" : "opacity-0"} transition-opacity duration-300
+          rounded-lg h-40 w-full object-cover mb-3
+             transform transition-transform duration-300 hover:scale-105
+           ${
+             imgLoaded ? "opacity-100" : "opacity-0"
+           } transition-opacity duration-300
 `}
         />
 
-        <h3 className="text-lg font-semibold text-[#1B3C53] ">{product.name}</h3>
+        <h3 className="text-lg font-semibold text-[#1B3C53] ">
+          {product.name}
+        </h3>
         <p className="text-sm text-gray-600 mt-2 line-clamp-1 ">
           {product.description}
         </p>

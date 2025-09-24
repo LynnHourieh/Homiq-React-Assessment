@@ -82,16 +82,17 @@ const Products: React.FC = () => {
       </div>
 
       <div className="max-w-7xl mx-auto space-y-6">
-        <div className="flex justify-center space-x-3">
+        <div className="flex justify-center  flex-wrap  gap-3">
           {categories.map((cat) => (
             <button
               key={cat}
               onClick={() => setCategory(cat)}
- className={`px-4 py-2 rounded-lg transition 
-      ${category === cat 
-        ? "bg-[#456882] text-white"   
-        : "bg-gray-200 text-gray-800 hover:bg-[#456882] hover:text-white"}`
-    }
+              className={`px-4 py-2 rounded-lg transition 
+      ${
+        category === cat
+          ? "bg-[#456882] text-white"
+          : "bg-gray-200 text-gray-800 hover:bg-[#456882] hover:text-white"
+      }`}
             >
               {cat}
             </button>
