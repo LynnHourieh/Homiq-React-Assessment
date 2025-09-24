@@ -140,6 +140,30 @@ To get your own API key:
 
 
 ------------------------------------------------------------------------
+## 🚀 Design Improvements
+
+### 🔹 Authentication Pages (Login & Signup)
+- Updated the design to match a **modern split layout**.  
+- Integrated **Swiper.js** with the `fade` effect to cycle through multiple images.  
+- Applied a **consistent color palette** and hover effects for better interactivity.  
+- Ensured **responsiveness** across all device sizes.  
+
+### 🔹 Products Page & Product Detail Modal
+- Followed the **Figma design suggestions** as closely as possible.  
+- Added **hover animations** on product cards.  
+- Improved the **product detail modal** with a cleaner layout and enlarged image.  
+- Implemented **skeleton loaders** for product images while they load.  
+- Made sure the design remains **responsive** on all devices.  
+
+### 🔹 Tools & Libraries Used
+- **Tailwind CSS** → Styling, responsiveness, transitions, hover effects.  
+- **Swiper.js** → Image slideshow with fade effect.  
+- **React Hook Form + Yup** → Form handling & validation.  
+- **bcryptjs** → Password hashing for secure authentication.  
+- **Unsplash API / Picsum** → Placeholder product and hero images.  
+- **React Icons** → Icons for UI elements (logout, stars, etc.).  
+
+------------------------------------------------------------------------
 
 ## 🤝 Contributing
 
