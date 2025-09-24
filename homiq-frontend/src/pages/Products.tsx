@@ -66,7 +66,7 @@ const Products: React.FC = () => {
   const totalPages = Math.ceil(filteredProducts.length / pageSize);
 
   return (
-    <div className="min-h-screen bg-[#F9F3EF] p-6">
+    <div className="min-h-screen bg-gradient-to-br from-[#FFFDFC] via-[#F9F3EF] to-[#EBDDD5]  p-6">
       <div className="max-w-7xl mx-auto mb-6 flex items-center justify-end">
         <SearchBar search={search} setSearch={setSearch} />
 
