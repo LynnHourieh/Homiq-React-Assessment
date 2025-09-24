@@ -9,6 +9,11 @@ import { useAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import HeroSlideshow from "../components/HeroSlideShow";
 
+ import LaptopImg from "../assets/images/products/laptop.jpg";
+import DesktopImg from "../assets/images/products/desktop.jpg";
+import ChairImg from "../assets/images/products/chair.jpg";
+import RoomImg from "../assets/images/products/room.jpg";
+import PaletteImg from "../assets/images/products/palette.jpg";
 const Login = () => {
   const [loginError, setLoginError] = useState<string | null>(null);
   const { login } = useAuth();
@@ -48,12 +53,13 @@ const Login = () => {
       setLoginError("Something went wrong. Try again.");
     }
   };
+  const slides = [LaptopImg, ChairImg, DesktopImg, RoomImg, PaletteImg];
 
   return (
     <div className="relative h-screen w-screen overflow-hidden">
       {/* 🔹 Background slideshow */}
       <div className="absolute inset-0 z-0">
-        <HeroSlideshow />
+        <HeroSlideshow slides={slides} />
       </div>
 
       {/* 🔹 Dark overlay for contrast */}
