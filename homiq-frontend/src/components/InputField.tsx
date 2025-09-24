@@ -26,7 +26,7 @@ const InputField: React.FC<InputFieldProps<any>> = ({
         {...(register ? register(name) : {})}
         value={value}
         onChange={onChange}
-        className={`mt-1 block w-full border rounded-md p-2 focus:ring-2 focus:outline-none ${
+        className={`mt-1 block w-full border rounded-md p-2 focus:outline-none ${
           error
             ? "border-red-500 focus:ring-red-500"
             : "border-gray-300 focus:ring-blue-500"

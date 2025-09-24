@@ -75,3 +75,8 @@ export interface ProductCardProps {
 export interface HeroSlideshowProps {
   slides: string[];
 }
+
+export interface SearchBarProps {
+  search: string;
+  setSearch: (value: string) => void;
+}

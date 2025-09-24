@@ -1,18 +1,18 @@
 import React, { useEffect, useState } from "react";
 import type { Product } from "../models/components";
 import ProductCard from "../components/ProductCard";
-import InputField from "../components/InputField";
 import SelectField from "../components/SelectField";
 import Modal from "../components/Modal";
 import { LogoutIcon } from "../assets/icons";
 import { useAuth } from "../context/AuthContext";
+import SearchBar from "../components/SearchBar";
 
 const Products: React.FC = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState("All");
   const [page, setPage] = useState(1);
-  const [pageSize, setPageSize] = useState(5);
+  const [pageSize, setPageSize] = useState(8);
   const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [loading, setLoading] = useState(false);
@@ -66,34 +66,38 @@ const Products: React.FC = () => {
   const totalPages = Math.ceil(filteredProducts.length / pageSize);
 
   return (
-    <div className="min-h-screen bg-gray-50 p-6">
-      <div className="flex items-center justify-between pb-6">
-        <h1 className="text-[32px] font-bold text-center text-gray-800 flex-1">
-          Our Products
-        </h1>
+    <div className="min-h-screen bg-[#F9F3EF] p-6">
+      <div className="max-w-7xl mx-auto mb-6 flex items-center justify-end">
+        <SearchBar search={search} setSearch={setSearch} />
+
         <div onClick={() => logout()}>
           <LogoutIcon className=" w-6 h-6 cursor-pointer hover:text-gray-600" />
         </div>
       </div>
 
+      <div className="flex items-center justify-between pb-6">
+        <h1 className="text-[32px] font-bold text-center text-[#1B3C53] flex-1">
+          Every product tells a <i className="text-[#456882]">story!</i>
+        </h1>
+      </div>
+
       <div className="max-w-7xl mx-auto space-y-6">
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-          <InputField
-            name="search"
-            type="text"
-            placeholder="Search products..."
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-          />
-          <SelectField
-            value={category}
-            onChange={(e) => setCategory(e.target.value)}
-            options={categories.map((category) => ({
-              value: category,
-              label: category,
-            }))}
-          />
+        <div className="flex justify-center space-x-3">
+          {categories.map((cat) => (
+            <button
+              key={cat}
+              onClick={() => setCategory(cat)}
+ className={`px-4 py-2 rounded-lg transition 
+      ${category === cat 
+        ? "bg-[#456882] text-white"   
+        : "bg-gray-200 text-gray-800 hover:bg-[#456882] hover:text-white"}`
+    }
+            >
+              {cat}
+            </button>
+          ))}
         </div>
+
         {error && (
           <div className="text-red-600 bg-red-100 border border-red-300 rounded-lg p-3 text-center">
             {error}
@@ -143,7 +147,7 @@ const Products: React.FC = () => {
                   value={pageSize}
                   onChange={(e) => setPageSize(Number(e.target.value))}
                   options={[
-                    { value: 5, label: "5 / page" },
+                    { value: 8, label: "8 / page" },
                     { value: 10, label: "10 / page" },
                   ]}
                 />

@@ -2,12 +2,12 @@ import Rating from "./Rating";
 import { useUnsplashImage } from "../hooks/useUnsplashImage";
 import type { ProductCardProps } from "../models/components";
 import { useState } from "react";
+import { VisibilityIcon } from "../assets/icons";
 
 const ProductCard: React.FC<ProductCardProps> = ({
   product,
   onSelect,
   variant = "card",
-  onClose,
 }) => {
   const imageUrl = useUnsplashImage(product.name);
   const [imgLoaded, setImgLoaded] = useState(false);
@@ -30,57 +30,45 @@ const ProductCard: React.FC<ProductCardProps> = ({
 `}
         />
 
-        <h3 className="text-lg font-semibold text-gray-800 text-center">
-          {product.name}
-        </h3>
-        <p className="text-sm text-gray-500 text-center">{product.category}</p>
-        <p className="text-blue-600 font-bold mt-1 text-center">
-          ${product.price}
-        </p>
-        <div className="flex items-center justify-center mt-1">
-          <Rating value={product.rating} />
-        </div>
-        <p className="text-sm text-gray-600 mt-2 line-clamp-3 text-center">
+        <h3 className="text-lg font-semibold text-[#1B3C53] ">{product.name}</h3>
+        <p className="text-sm text-gray-600 mt-2 line-clamp-1 ">
           {product.description}
         </p>
+        <div className="mt-auto flex items-center justify-between">
+          {" "}
+          <p className="text-[#456882] font-bold mt-1 ">${product.price}</p>
+          <VisibilityIcon fill="#456882" />
+        </div>
       </div>
     );
   }
 
   // === Modal view ===
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-      <div className="flex items-center justify-center bg-gray-100 rounded-lg">
+    <div className="bg-gradient-to-b from-gray-900  rounded-2xl p-6 text-white max-w-md mx-auto shadow-xl">
+      <div className="flex items-center justify-center">
         <img
           src={imageUrl || product.image}
           alt={product.name}
-          className="max-h-64 object-contain 
-             transform transition-transform duration-300 
-             hover:scale-105"
+          className="w-full max-h-80 object-contain rounded-lg"
         />
       </div>
 
-      <div className="flex flex-col gap-3">
-        <h2 className="text-2xl font-bold text-gray-800 text-center">
-          {product.name}
-        </h2>
-        <p className="text-sm text-gray-500 text-center">{product.category}</p>
-        <p className="text-xl font-semibold text-blue-600 text-center">
-          ${product.price.toFixed(2)}
-        </p>
-        <div className="flex items-center justify-center mt-1">
-          <Rating value={product.rating} />
-        </div>
+      <h2 className="mt-6 text-2xl font-bold text-center">{product.name}</h2>
 
-        <p className="text-gray-600 text-center">{product.description}</p>
-
-        <button
-          className="mt-4 bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 cursor-pointer"
-          onClick={onClose}
-        >
-          Back to Product Page
-        </button>
+      <div className="flex justify-center mt-2">
+        <Rating value={product.rating} />
       </div>
+
+      <p className="mt-3 text-sm text-gray-300 text-center leading-relaxed">
+        {product.description}
+      </p>
+
+      <p className="mt-6 text-2xl font-bold text-center">{product.price}$</p>
+
+      <button className="mt-6 w-full bg-[#456882] text-white font-semibold py-3 rounded-lg shadow-md hover:bg-[#1B3C53] transition">
+        Add to cart
+      </button>
     </div>
   );
 };
