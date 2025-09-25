@@ -51,13 +51,13 @@ npm install -g json-server
 In one terminal, start the products API (port `4000`):
 
 ``` bash
-json-server --watch products.json --port 4000
+json-server --watch public/products.json --port 4000
 ```
 
 In another terminal, start the users API (port `4001`):
 
 ``` bash
-json-server --watch users.json --port 4001
+json-server --watch public/users.json --port 4001
 ```
 
 ### 5. Start the React app
