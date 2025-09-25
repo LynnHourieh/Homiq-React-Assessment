@@ -51,12 +51,14 @@ npm install -g json-server
 In one terminal, start the products API (port `4000`):
 
 ``` bash
+cd homiq-frontend
 json-server --watch public/products.json --port 4000
 ```
 
 In another terminal, start the users API (port `4001`):
 
 ``` bash
+cd homiq-frontend
 json-server --watch public/users.json --port 4001
 ```
 
