@@ -1,7 +1,7 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import InputField from "../components/InputField";
 import type { LoginFormInputs } from "../models/components";
-import { useForm } from "react-hook-form";
+import {  useForm } from "react-hook-form";
 import { loginSchema } from "../validations/loginSchema";
 import bcrypt from "bcryptjs";
 import { useState } from "react";
@@ -9,13 +9,14 @@ import { useAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import HeroSlideshow from "../components/HeroSlideShow";
 
- import LaptopImg from "../assets/images/products/laptop.jpg";
+import LaptopImg from "../assets/images/products/laptop.jpg";
 import DesktopImg from "../assets/images/products/desktop.jpg";
 import ChairImg from "../assets/images/products/chair.jpg";
 import RoomImg from "../assets/images/products/room.jpg";
 import PaletteImg from "../assets/images/products/palette.jpg";
 const Login = () => {
   const [loginError, setLoginError] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
   const { login } = useAuth();
   const navigate = useNavigate();
 
@@ -31,10 +32,12 @@ const Login = () => {
 
   const onSubmit = async (data: LoginFormInputs) => {
     try {
+      setIsLoading(true);
       const response = await fetch(`${API_URL}/users?email=${data.email}`);
       const users = await response.json();
 
       if (users.length === 0) {
+        setIsLoading(false);
         setLoginError("User not found. Please sign up first.");
         return;
       }
@@ -43,12 +46,15 @@ const Login = () => {
       const isMatch = await bcrypt.compare(data.password, user.password);
 
       if (isMatch) {
+        setIsLoading(false);
         login({ id: user.id, email: user.email });
         navigate("/products");
       } else {
+        setIsLoading(false);
         setLoginError("Incorrect password");
       }
     } catch (err) {
+      setIsLoading(false);
       console.error("Login error:", err);
       setLoginError("Something went wrong. Try again.");
     }
@@ -105,13 +111,23 @@ const Login = () => {
               type="submit"
               className="w-full bg-[#4DADF7]/80 text-white font-medium py-2 rounded-md hover:bg-[#176BB5]/90 transition-colors cursor-pointer"
             >
-              Login
+              {isLoading ? (
+                <div className="flex items-center justify-center space-x-2 gap-2">
+                  Logging in...
+                  <div className="w-4 h-4 border-4 border-white-400 border-t-transparent rounded-full animate-spin"></div>
+                </div>
+              ) : (
+                "Login"
+              )}
             </button>
           </form>
 
-          <p className="text-sm text-center mt-6 text-gray-200">
+          <p className="text-sm text-center mt-6 text-white">
             Don’t have an account?{" "}
-            <a href="/signup" className="text-blue-300 hover:underline">
+            <a
+              href="/signup"
+              className="text-blue-300 hover:underline font-bold"
+            >
               Sign up
             </a>
           </p>

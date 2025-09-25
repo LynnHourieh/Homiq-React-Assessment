@@ -1,7 +1,7 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import InputField from "../components/InputField";
 import type { SignUpFormInputs } from "../models/components";
-import { useForm } from "react-hook-form";
+import {  useForm } from "react-hook-form";
 import { signupSchema } from "../validations/signupSchema";
 import bcrypt from "bcryptjs";
 import { useNavigate } from "react-router-dom";
@@ -11,10 +11,11 @@ import DesktopImg from "../assets/images/products/desktop.jpg";
 import ChairImg from "../assets/images/products/chair.jpg";
 import RoomImg from "../assets/images/products/room.jpg";
 import PaletteImg from "../assets/images/products/palette.jpg";
+import { useState } from "react";
 
 const Signup = () => {
   const navigate = useNavigate();
- 
+ const [isLoading,setIsLoading]=useState(false);
   const {
     register,
     handleSubmit,
@@ -25,6 +26,7 @@ const Signup = () => {
   const USER_URL = import.meta.env.VITE_USERS_API;
   const onSubmit = async (data: SignUpFormInputs) => {
     try {
+      setIsLoading(true);
       const hashedPassword = await bcrypt.hash(data.password, 10);
 
       const response = await fetch(`${USER_URL}/users`, {
@@ -39,9 +41,10 @@ const Signup = () => {
       });
 
       if (!response.ok) {
+        setIsLoading(false);
         throw new Error("Failed to register user");
       }
-
+      setIsLoading(false);
       navigate("/login");
     } catch (err) {
       console.error("Error creating user:", err);
@@ -138,11 +141,22 @@ const slides = [LaptopImg, ChairImg, DesktopImg, RoomImg, PaletteImg];
             </div>
 
             <button
-              type="submit"
-              className="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition"
-            >
-              Sign Up
-            </button>
+        type="submit"
+        disabled={isLoading}
+        className={`w-full flex items-center justify-center bg-blue-600 text-white py-2 rounded-md transition 
+          ${isLoading ? "opacity-70 cursor-not-allowed" : "hover:bg-blue-700"}`}
+      >
+        {isLoading ? (
+          <div className="flex items-center space-x-2">
+          
+                Signing Up... 
+                            <div className="w-4 h-4 border-4 border-blue-400 border-t-transparent rounded-full animate-spin"></div>
+            
+          </div>
+        ) : (
+          "Sign Up"
+        )}
+      </button>
           </form>
 
           <div className="flex items-center my-6">
