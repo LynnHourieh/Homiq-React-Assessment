@@ -71,6 +71,13 @@ npm run dev
 App will run at <http://localhost:5173>.
 
 ------------------------------------------------------------------------
+## Deployed APIs:
+
+``` bash
+https://homiq-api.onrender.com/users
+https://homiq-api.onrender.com/products
+```
+------------------------------------------------------------------------
 
 ## 🧩 Features
 
