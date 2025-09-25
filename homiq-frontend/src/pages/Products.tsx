@@ -19,7 +19,7 @@ const Products: React.FC = () => {
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [isLoading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const PRODUCTS_API_URL = import.meta.env.VITE_PRODUCTS_API || "http://localhost:4000";
+  const PRODUCTS_API_URL = import.meta.env.VITE_PRODUCTS_API;
 
   const { logout } = useAuth();
 

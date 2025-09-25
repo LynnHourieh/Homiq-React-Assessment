@@ -23,7 +23,7 @@ const Signup = () => {
   } = useForm<SignUpFormInputs>({
     resolver: yupResolver(signupSchema),
   });
-  const USER_URL = import.meta.env.VITE_USERS_API || "http://localhost:4001";
+  const USER_URL = import.meta.env.VITE_USERS_API;
   const onSubmit = async (data: SignUpFormInputs) => {
     try {
       setIsLoading(true);

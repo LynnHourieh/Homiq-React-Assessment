@@ -30,8 +30,8 @@ npm install
 Create a `.env` file in the homiq-frontend directory :
 
 ``` bash
-VITE_PRODUCTS_API=http://localhost:4000
-VITE_USERS_API=http://localhost:4001
+VITE_PRODUCTS_API=https://homiq-api.onrender.com
+VITE_USERS_API=https://homiq-api.onrender.com
 VITE_UNSPLASH_KEY=your_unsplash_api_key
 ```
 
