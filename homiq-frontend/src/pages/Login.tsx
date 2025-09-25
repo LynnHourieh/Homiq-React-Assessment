@@ -27,7 +27,7 @@ const Login = () => {
     resolver: yupResolver(loginSchema),
   });
 
-  const API_URL = import.meta.env.VITE_USERS_API;
+  const API_URL = import.meta.env.VITE_USERS_API || "http://localhost:4001";
 
   const onSubmit = async (data: LoginFormInputs) => {
     try {
