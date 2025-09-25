@@ -19,9 +19,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
         className="bg-white rounded-xl shadow-md p-4 flex flex-col cursor-pointer hover:shadow-lg transition"
         onClick={() => onSelect?.(product)}
       >
-        {!imgLoaded && (
-          <div className="absolute inset-0 rounded-lg bg-gray-200 animate-pulse" />
-        )}
+      
         <img
           src={imageUrl || product.image}
           alt={product.name}

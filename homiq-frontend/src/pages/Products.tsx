@@ -6,6 +6,8 @@ import Modal from "../components/Modal";
 import { LogoutIcon } from "../assets/icons";
 import { useAuth } from "../context/AuthContext";
 import SearchBar from "../components/SearchBar";
+import { ProductSkeleton } from "../components/ProductSkeleton";
+import { CategorySkeleton } from "../components/CategorySkeleton";
 
 const Products: React.FC = () => {
   const [products, setProducts] = useState<Product[]>([]);
@@ -15,7 +17,7 @@ const Products: React.FC = () => {
   const [pageSize, setPageSize] = useState(8);
   const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
-  const [loading, setLoading] = useState(false);
+  const [isLoading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const PRODUCTS_API_URL = import.meta.env.VITE_PRODUCTS_API;
 
@@ -82,80 +84,86 @@ const Products: React.FC = () => {
       </div>
 
       <div className="max-w-7xl mx-auto space-y-6">
-        <div className="flex justify-center  flex-wrap  gap-3">
-          {categories.map((cat) => (
-            <button
-              key={cat}
-              onClick={() => setCategory(cat)}
-              className={`px-4 py-2 rounded-lg transition 
-      ${
-        category === cat
-          ? "bg-[#456882] text-white"
-          : "bg-gray-200 text-gray-800 hover:bg-[#456882] hover:text-white"
-      }`}
-            >
-              {cat}
-            </button>
-          ))}
-        </div>
+       <div className="flex justify-center flex-wrap gap-3">
+  {isLoading ? (
+    
+    [...Array(5)].map((_, i) => <CategorySkeleton key={i} />)
+  ) : (
+    categories.map((cat) => (
+      <button
+        key={cat}
+        onClick={() => setCategory(cat)}
+        className={`px-4 py-2 rounded-lg transition 
+          ${
+            category === cat
+              ? "bg-[#456882] text-white"
+              : "bg-gray-200 text-gray-800 hover:bg-[#456882] hover:text-white"
+          }`}
+      >
+        {cat}
+      </button>
+    ))
+  )}
+</div>
+
 
         {error && (
           <div className="text-red-600 bg-red-100 border border-red-300 rounded-lg p-3 text-center">
             {error}
           </div>
         )}
-        {loading ? (
-          <div className="flex justify-center items-center py-12">
-            <div className="w-8 h-8 border-4 border-blue-400 border-t-transparent rounded-full animate-spin"></div>
-            <span className="ml-3 text-gray-600">Loading products...</span>
+
+        {isLoading ? (
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+            {[...Array(8)].map((_, i) => (
+              <ProductSkeleton key={i} />
+            ))}
           </div>
         ) : (
-          <>
-            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-              {paginated.map((product) => (
-                <ProductCard
-                  key={product.id}
-                  product={product}
-                  onSelect={(p) => setSelectedProduct(p)}
-                />
-              ))}
-            </div>
-
-            <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-              <div>
-                <span className="text-sm text-gray-600">
-                  Page {page} of {totalPages || 1}
-                </span>
-              </div>
-
-              <div className="flex items-center gap-2">
-                <button
-                  onClick={() => setPage((p) => Math.max(p - 1, 1))}
-                  disabled={page === 1}
-                  className="px-3 py-1 border rounded-lg disabled:opacity-50"
-                >
-                  Prev
-                </button>
-                <button
-                  onClick={() => setPage((p) => Math.min(p + 1, totalPages))}
-                  disabled={page === totalPages}
-                  className="px-3 py-1 border rounded-lg disabled:opacity-50"
-                >
-                  Next
-                </button>
-
-                <SelectField
-                  value={pageSize}
-                  onChange={(e) => setPageSize(Number(e.target.value))}
-                  options={[
-                    { value: 8, label: "8 / page" },
-                    { value: 10, label: "10 / page" },
-                  ]}
-                />
-              </div>
-            </div>
-          </>
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+            {paginated.map((product) => (
+              <ProductCard
+                key={product.id}
+                product={product}
+                onSelect={(p) => setSelectedProduct(p)}
+              />
+            ))}
+          </div>
         )}
+
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div>
+            <span className="text-sm text-gray-600">
+              Page {page} of {totalPages || 1}
+            </span>
+          </div>
+
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => setPage((p) => Math.max(p - 1, 1))}
+              disabled={page === 1}
+              className="px-3 py-1 border rounded-lg disabled:opacity-50"
+            >
+              Prev
+            </button>
+            <button
+              onClick={() => setPage((p) => Math.min(p + 1, totalPages))}
+              disabled={page === totalPages}
+              className="px-3 py-1 border rounded-lg disabled:opacity-50"
+            >
+              Next
+            </button>
+
+            <SelectField
+              value={pageSize}
+              onChange={(e) => setPageSize(Number(e.target.value))}
+              options={[
+                { value: 8, label: "8 / page" },
+                { value: 10, label: "10 / page" },
+              ]}
+            />
+          </div>
+        </div>
       </div>
       <Modal
         isOpen={!!selectedProduct}

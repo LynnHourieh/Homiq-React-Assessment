@@ -80,3 +80,7 @@ export interface SearchBarProps {
   search: string;
   setSearch: (value: string) => void;
 }
+
+export interface SkeletonLoaderProps {
+  className?: string;
+}
