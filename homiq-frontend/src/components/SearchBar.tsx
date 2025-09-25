@@ -12,8 +12,8 @@ const SearchBar: React.FC<SearchBarProps> = ({  search, setSearch }) => {
       
       <button
         onClick={() => setOpen(!open)}
-        className="p-2  text-white  transition cursor-pointer "
-      >
+      className={`p-2 text-white transition cursor-pointer rounded-md 
+    ${open ? "bg-[#F9D03F] " : "bg-transparent hover:bg-[#F9D03F] "}`}>
         <SearchIcon />
       </button>
 
@@ -22,7 +22,7 @@ const SearchBar: React.FC<SearchBarProps> = ({  search, setSearch }) => {
           open ? "w-64 opacity-100" : "w-0 opacity-0"
         }`}
       >
-        <InputField name="search" value={search} onChange={(e) => setSearch(e.target.value)}  />
+        <InputField name="search" value={search} onChange={(e) => setSearch(e.target.value)} className="text-white" />
       </div>
     </div>
   );

@@ -3,7 +3,7 @@ import { SkeletonLoader } from "./SkeletonLoader";
 
 export const ProductSkeleton: React.FC = () => {
   return (
-    <div className="bg-white shadow rounded-lg p-4 w-full">
+    <div className="bg-[#383322] shadow rounded-lg p-4 w-full">
       {/* Image placeholder */}
       <SkeletonLoader className="h-40 w-full rounded-md" />
 

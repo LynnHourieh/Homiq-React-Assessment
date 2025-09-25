@@ -56,17 +56,17 @@ const slides = [LaptopImg, ChairImg, DesktopImg, RoomImg, PaletteImg];
 
 
   return (
-    <div className="flex h-screen overflow-hidden bg-white/40 backdrop-blur-md">
-      <div className="hidden md:block w-1/2 h-full" > 
+    <div className="flex h-screen overflow-hidden  bg-gradient-to-b from-[#322C1B] to-[#171616] backdrop-blur-md text-[#FFFF]">
+      <div className="hidden md:block w-1/2 h-full">
         <HeroSlideshow slides={slides}/>
       </div>
 
       <div className="flex w-full md:w-1/2 items-center justify-center p-8 animate-slideIn">
-        <div className="w-full max-w-md bg-white shadow-lg rounded-xl p-8">
-          <h2 className="text-3xl font-bold text-gray-800 mb-2 text-center">
+        <div className="w-full max-w-md bg-[#383322] shadow-lg rounded-xl p-8">
+          <h2 className="text-3xl font-bold  mb-2 text-center">
             Create an Account
           </h2>
-          <p className="text-gray-500 mb-6 text-center">
+          <p className=" mb-6 text-center">
             Sign up with your email and password
           </p>
 
@@ -122,6 +122,7 @@ const slides = [LaptopImg, ChairImg, DesktopImg, RoomImg, PaletteImg];
                 name="password"
                 register={register}
                 placeholder="••••••••"
+              
               />
               {errors.password && (
                 <p className="text-red-500 text-sm mt-1">
@@ -143,14 +144,14 @@ const slides = [LaptopImg, ChairImg, DesktopImg, RoomImg, PaletteImg];
             <button
         type="submit"
         disabled={isLoading}
-        className={`w-full flex items-center justify-center bg-blue-600 text-white py-2 rounded-md transition 
-          ${isLoading ? "opacity-70 cursor-not-allowed" : "hover:bg-blue-700"}`}
+        className={`w-full flex items-center justify-center bg-[#F9D03F] text-black py-2 rounded-md transition 
+          ${isLoading ? "opacity-70 cursor-not-allowed" : "hover:bg-[#F0B100]"}`}
       >
         {isLoading ? (
           <div className="flex items-center space-x-2">
           
                 Signing Up... 
-                            <div className="w-4 h-4 border-4 border-blue-400 border-t-transparent rounded-full animate-spin"></div>
+                            <div className="w-4 h-4 border-4 border-black border-t-transparent rounded-full animate-spin"></div>
             
           </div>
         ) : (
@@ -167,7 +168,7 @@ const slides = [LaptopImg, ChairImg, DesktopImg, RoomImg, PaletteImg];
 
           <p className="text-center text-gray-600 mt-6">
             Already have an account?{" "}
-            <a href="/login" className="text-blue-600 hover:underline">
+            <a href="/login" className="text-[#F9D03F] hover:underline">
               Login
             </a>
           </p>

@@ -16,7 +16,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
   if (variant === "card") {
     return (
       <div
-        className="bg-white rounded-xl shadow-md p-4 flex flex-col cursor-pointer hover:shadow-lg transition"
+        className="bg-[#383322] text-[#FFFF] rounded-xl shadow-md p-4 flex flex-col cursor-pointer hover:shadow-lg transition"
         onClick={() => onSelect?.(product)}
       >
       
@@ -33,16 +33,16 @@ const ProductCard: React.FC<ProductCardProps> = ({
 `}
         />
 
-        <h3 className="text-lg font-semibold text-[#1B3C53] ">
+        <h3 className="text-lg font-semibold  ">
           {product.name}
         </h3>
-        <p className="text-sm text-gray-600 mt-2 line-clamp-1 ">
+        <p className="text-sm mt-2 line-clamp-1 ">
           {product.description}
         </p>
         <div className="mt-auto flex items-center justify-between">
           {" "}
-          <p className="text-[#456882] font-bold mt-1 ">${product.price}</p>
-          <VisibilityIcon fill="#456882" />
+          <p className=" font-bold mt-1 ">${product.price}</p>
+          <VisibilityIcon fill="#F9D03F" />
         </div>
       </div>
     );
@@ -50,7 +50,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
 
   // === Modal view ===
   return (
-    <div className="bg-gradient-to-b from-gray-900  rounded-2xl p-6 text-white max-w-md mx-auto shadow-xl">
+    <div className="bg-[#383322] rounded-2xl p-6 text-white max-w-md mx-auto shadow-xl">
       <div className="flex items-center justify-center">
         <img
           src={imageUrl || product.image}
@@ -71,7 +71,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
 
       <p className="mt-6 text-2xl font-bold text-center">{product.price}$</p>
 
-      <button className="mt-6 w-full bg-[#456882] text-white font-semibold py-3 rounded-lg shadow-md hover:bg-[#1B3C53] transition">
+      <button className="mt-6 w-full bg-[#F9D03F] text-black font-semibold py-3 rounded-lg shadow-md hover:bg-[#F0B100] transition">
         Add to cart
       </button>
     </div>

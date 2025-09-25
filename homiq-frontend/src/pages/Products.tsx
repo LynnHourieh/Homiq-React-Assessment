@@ -68,7 +68,7 @@ const Products: React.FC = () => {
   const totalPages = Math.ceil(filteredProducts.length / pageSize);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#FFFDFC] via-[#F9F3EF] to-[#EBDDD5]  p-6">
+    <div className="min-h-screen  bg-gradient-to-b from-[#322C1B] to-[#171616] p-6">
       <div className="max-w-7xl mx-auto mb-6 flex items-center justify-end">
         <SearchBar search={search} setSearch={setSearch} />
 
@@ -77,35 +77,32 @@ const Products: React.FC = () => {
         </div>
       </div>
 
-      <div className="flex items-center justify-between pb-6">
-        <h1 className="text-[32px] font-bold text-center text-[#1B3C53] flex-1">
-          Every product tells a <i className="text-[#456882]">story!</i>
+      <div className="flex items-center justify-center gap-2 pb-6 ">
+        <h1 className=" font-lato font-heavy text-[36px] font-bold text-center text-[#FFFF] ">
+          Every product tells
         </h1>
+        <p className="font-lato font-light text-[32px] text-[#FFFF]"> a story!</p>
       </div>
 
       <div className="max-w-7xl mx-auto space-y-6">
-       <div className="flex justify-center flex-wrap gap-3">
-  {isLoading ? (
-    
-    [...Array(5)].map((_, i) => <CategorySkeleton key={i} />)
-  ) : (
-    categories.map((cat) => (
-      <button
-        key={cat}
-        onClick={() => setCategory(cat)}
-        className={`px-4 py-2 rounded-lg transition 
+        <div className="flex justify-center flex-wrap gap-3">
+          {isLoading
+            ? [...Array(5)].map((_, i) => <CategorySkeleton key={i} />)
+            : categories.map((cat) => (
+                <button
+                  key={cat}
+                  onClick={() => setCategory(cat)}
+                  className={`px-4 py-2 rounded-lg transition 
           ${
             category === cat
-              ? "bg-[#456882] text-white"
-              : "bg-gray-200 text-gray-800 hover:bg-[#456882] hover:text-white"
+              ? "bg-[#F9D03F] text-black"
+              : " text-[#696969] hover:bg-[#1F1F1F] hover:text-white"
           }`}
-      >
-        {cat}
-      </button>
-    ))
-  )}
-</div>
-
+                >
+                  {cat}
+                </button>
+              ))}
+        </div>
 
         {error && (
           <div className="text-red-600 bg-red-100 border border-red-300 rounded-lg p-3 text-center">
@@ -133,7 +130,7 @@ const Products: React.FC = () => {
 
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
           <div>
-            <span className="text-sm text-gray-600">
+            <span className="text-sm text-[#696969]">
               Page {page} of {totalPages || 1}
             </span>
           </div>
@@ -142,14 +139,14 @@ const Products: React.FC = () => {
             <button
               onClick={() => setPage((p) => Math.max(p - 1, 1))}
               disabled={page === 1}
-              className="px-3 py-1 border rounded-lg disabled:opacity-50"
+              className="px-3 py-1 border rounded-lg disabled:opacity-50 text-[#696969]"
             >
               Prev
             </button>
             <button
               onClick={() => setPage((p) => Math.min(p + 1, totalPages))}
               disabled={page === totalPages}
-              className="px-3 py-1 border rounded-lg disabled:opacity-50"
+              className="px-3 py-1 border rounded-lg disabled:opacity-50 text-[#696969]"
             >
               Next
             </button>

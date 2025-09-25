@@ -9,7 +9,7 @@ const HeroSlideshow: React.FC<HeroSlideshowProps> = (
 ) => {
 
   return (
-    <div className="w-full h-full">
+    <div className="w-full h-full " >
       <Swiper
         modules={[Autoplay, EffectFade]}
         effect="fade"
@@ -23,9 +23,9 @@ const HeroSlideshow: React.FC<HeroSlideshowProps> = (
               <img
                 src={url}
                 alt={`Slide ${idx}`}
-                className="w-full h-full object-cover transform scale-105 transition-transform duration-[3000ms] rounded-lg"
+                className="w-full h-full object-cover transform scale-105 transition-transform duration-[3000ms] rounded-lg "
               />
-              <div className="absolute inset-0 bg-gradient-to-r from-black/40 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-r from-black/20 to-black/80" />
               <div className="absolute bottom-10 left-8 text-white">
                 <h2 className="text-3xl font-bold">Shop Smart</h2>
                 <p className="mt-2 text-lg">

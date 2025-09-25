@@ -17,7 +17,7 @@ const InputField: React.FC<InputFieldProps<any>> = ({
 }) => {
   return (
     <div>
-      <label className={`block text-sm font-medium text-gray-700 text-left ${labelClassName}`}>
+      <label className={`block text-sm font-medium  text-left ${labelClassName}`}>
         {label}
       </label>
       <input

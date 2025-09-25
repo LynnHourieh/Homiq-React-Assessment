@@ -8,7 +8,6 @@ import { useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import HeroSlideshow from "../components/HeroSlideShow";
-
 import LaptopImg from "../assets/images/products/laptop.jpg";
 import DesktopImg from "../assets/images/products/desktop.jpg";
 import ChairImg from "../assets/images/products/chair.jpg";
@@ -109,10 +108,10 @@ const Login = () => {
 
             <button
               type="submit"
-              className="w-full bg-[#4DADF7]/80 text-white font-medium py-2 rounded-md hover:bg-[#176BB5]/90 transition-colors cursor-pointer"
+              className="w-full bg-[#F9D03F] text-black font-medium py-2 rounded-md hover:bg-[#F0B100] transition-colors cursor-pointer"
             >
               {isLoading ? (
-                <div className="flex items-center justify-center space-x-2 gap-2">
+                <div className="flex items-center justify-center space-x-2 gap-2 ">
                   Logging in...
                   <div className="w-4 h-4 border-4 border-white-400 border-t-transparent rounded-full animate-spin"></div>
                 </div>
@@ -126,7 +125,7 @@ const Login = () => {
             Don’t have an account?{" "}
             <a
               href="/signup"
-              className="text-blue-300 hover:underline font-bold"
+              className="text-[#F9D03F] hover:underline"
             >
               Sign up
             </a>
