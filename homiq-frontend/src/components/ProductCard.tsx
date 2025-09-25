@@ -55,7 +55,8 @@ const ProductCard: React.FC<ProductCardProps> = ({
         <img
           src={imageUrl || product.image}
           alt={product.name}
-          className="w-full max-h-80 object-contain rounded-lg"
+          onLoad={() => setImgLoaded(true)}
+          className={`w-full max-h-80 object-contain rounded-lg ${imgLoaded ? "opacity-100" : "opacity-0"} transition-opacity duration-300`}
         />
       </div>
 
