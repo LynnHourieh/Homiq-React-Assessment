@@ -96,7 +96,7 @@ const Products: React.FC = () => {
           ${
             category === cat
               ? "bg-[#F9D03F] text-black"
-              : " text-[#696969] hover:bg-[#1F1F1F] hover:text-white"
+              : " text-[#696969] hover:bg-[#383322] hover:text-white"
           }`}
                 >
                   {cat}
