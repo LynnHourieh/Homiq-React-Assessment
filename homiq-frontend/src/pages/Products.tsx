@@ -77,7 +77,7 @@ const Products: React.FC = () => {
         </div>
       </div>
 
-      <div className="flex items-center justify-center gap-2 pb-6 ">
+      <div className="flex items-center justify-center gap-2 pb-6 flex-wrap ">
         <h1 className=" font-lato font-heavy text-[36px] font-bold text-center text-[#FFFF] ">
           Every product tells
         </h1>
